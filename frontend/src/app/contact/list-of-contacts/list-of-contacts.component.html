@@ -1,10 +1,15 @@
-<input type="text" placeholder="Filter by email" #filter (keyup)="refreshFilteredList(filter.value)">
+<div class="d-flex flex-column align-items-center">
+    <input type="text" placeholder="Filter by email" #filter (keyup)="refreshVisualLists(filter.value)">
+    <br>
+    <ul>
+        <li *ngFor="let contact of paginatedContactsList">
+            {{contact.firstName}} {{contact.lastName}}, {{contact.email}}, {{contact.phoneNumber}}, {{contact.address}},
+            {{contact.city}} {{contact.zipCode}}
+        </li>
+    </ul>
 
-<ul>
-    <li *ngFor="let contact of filteredContactsList">
-        {{contact.firstName}} {{contact.lastName}}, {{contact.email}}, {{contact.phoneNumber}}, {{contact.address}},
-        {{contact.city}} {{contact.zipCode}}
-    </li>
-</ul>
+    Contacts matching the filter: {{filteredContactsList.length}}
 
-<ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
+    <ngb-pagination [collectionSize]="filteredContactsList.length" [(page)]="page" [pageSize]="pageSize"
+        aria-label="Default pagination" (pageChange)="refreshVisualLists(filter.value)"></ngb-pagination>
+</div>
