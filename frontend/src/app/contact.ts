@@ -1,9 +1,10 @@
 export interface Contact {
-    FirstName: String,
-    LastName: String,
-    Email: String,
-    PhoneNumber: String,
-    Address: String,
-    City: String,
-    ZipCode: String,
+    id: number,
+    firstName: String,
+    lastName: String,
+    email: String,
+    phoneNumber: String,
+    address: String,
+    city: String,
+    zipCode: String,
 }

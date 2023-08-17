@@ -1,1 +1,10 @@
-<p>list-of-contacts works!</p>
+<input type="text" placeholder="Filter by email" #filter (keyup)="refreshFilteredList(filter.value)">
+
+<ul>
+    <li *ngFor="let contact of filteredContactsList">
+        {{contact.firstName}} {{contact.lastName}}, {{contact.email}}, {{contact.phoneNumber}}, {{contact.address}},
+        {{contact.city}} {{contact.zipCode}}
+    </li>
+</ul>
+
+<ngb-pagination [collectionSize]="70" [(page)]="page" aria-label="Default pagination"></ngb-pagination>
