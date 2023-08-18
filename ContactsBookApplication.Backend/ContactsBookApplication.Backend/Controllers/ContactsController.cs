@@ -36,7 +36,7 @@ namespace ContactsBookApplication.Backend.Controllers
             return Ok(entityEntry.Entity);
         }
 
-        [HttpPost("edit")]
+        [HttpPut("")]
         public ActionResult Edit(Contact contact)
         {
             var entityEntry = context.Contacts.Find(contact.ID);

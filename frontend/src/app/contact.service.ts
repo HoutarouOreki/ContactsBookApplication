@@ -23,7 +23,7 @@ export class ContactService {
 
   editContact(contact: Contact): Observable<any> {
     const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-    return this.http.post<Contact>(this.url + '/edit', contact, httpOptions);
+    return this.http.put<Contact>(this.url, contact, httpOptions);
   }
 
   deleteContact(id: number): Observable<any> {
