@@ -9,9 +9,9 @@
     </div>
 </ng-template>
 
-<a id="notification" class="d-flex align-items-center flex-column justify-content-end">
+<div id="notification" class="d-flex align-items-center flex-column justify-content-end">
     <ngb-alert #alert *ngIf="!alertClosed" (closed)="alertClosed = true" class="mb-2">{{alertMessage}}</ngb-alert>
-</a>
+</div>
 
 <div class="d-flex flex-column align-items-center w-100">
 
