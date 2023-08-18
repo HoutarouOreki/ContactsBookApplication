@@ -9,4 +9,5 @@ import { Contact } from '../../contact';
 export class ShowContactComponent {
   @Input({ required: true }) contact!: Contact
   @Output() onEditButton = new EventEmitter();
+  @Output() onRemoveButton = new EventEmitter();
 }

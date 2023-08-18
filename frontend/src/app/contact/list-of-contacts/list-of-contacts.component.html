@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
         <app-contact-form [modal]="modal" [editedContact]="editedContact"
-            (newContactEvent)="onNewContact($event)"></app-contact-form>
+            (newContactEvent)="showMessageAndRefresh($event)"></app-contact-form>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
@@ -34,8 +34,8 @@
     <div class="card w-100" *ngIf="contactsLoaded">
         <ul class="list-group list-group-flush">
             <li *ngFor="let contact of paginatedContactsList" class="list-group-item">
-                <app-show-contact [contact]="contact"
-                    (onEditButton)="onEditContactButton(content, contact)"></app-show-contact>
+                <app-show-contact [contact]="contact" (onEditButton)="onEditContactButton(content, contact)"
+                    (onRemoveButton)="onRemoveContactButton(contact)"></app-show-contact>
             </li>
         </ul>
     </div>

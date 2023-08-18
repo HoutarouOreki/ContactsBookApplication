@@ -70,7 +70,18 @@ export class ListOfContactsComponent implements OnInit {
     this.modalService.open(content);
   }
 
-  onNewContact(message: string) {
+  onRemoveContactButton(contact: Contact) {
+    this.service.deleteContact(contact.id).subscribe({
+      complete: () => this.showMessageAndRefresh("Removed " + contact.firstName + " " + contact.lastName),
+      error: () => {
+        this.alertMessage = "Removing contact failed";
+        this.alertClosed = false;
+        setTimeout(() => this.alertClosed = true, 5000);
+      }
+    });
+  }
+
+  showMessageAndRefresh(message: string) {
     this.refreshList();
     this.alertMessage = message;
     this.alertClosed = false;
