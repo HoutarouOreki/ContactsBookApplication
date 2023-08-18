@@ -65,8 +65,9 @@ export class ContactFormComponent implements OnInit {
 
   handleResponse(contact: Contact) {
     this.sending = false;
-    this.newContactEvent.emit(contact.firstName + " " + contact.lastName +
-      this.editedContact ? " updated" : " added");
+    console.log(contact);
+    this.newContactEvent.emit((contact.firstName + " " + contact.lastName) +
+      (this.editedContact ? " updated" : " added"));
     this.modal.dismiss("complete");
   }
 

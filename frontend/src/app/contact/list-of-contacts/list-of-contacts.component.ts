@@ -61,6 +61,7 @@ export class ListOfContactsComponent implements OnInit {
 
   onCreateContactButton(content: any) {
     this.formTitle = "Create a Contact";
+    this.editedContact = undefined;
     this.modalService.open(content);
   }
 

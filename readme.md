@@ -1,5 +1,23 @@
 # Contacts Book
 
+![Alt text](image.png)
+Main view
+
+![Alt text](image-1.png)
+Creating a contact
+
+![Alt text](image-2.png)
+Updating a contact
+
+![Alt text](image-3.png)
+Success alert
+
+![Alt text](image-4.png)
+Filtering by email
+
+## Validation
+
+There's frontend and backend validation. Only first name, last name, email, and phone numbers are validated.
 
 ## Technologies and frameworks
 - Angular 16

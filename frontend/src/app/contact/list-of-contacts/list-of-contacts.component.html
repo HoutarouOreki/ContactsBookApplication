@@ -7,9 +7,6 @@
         <app-contact-form [modal]="modal" [editedContact]="editedContact"
             (newContactEvent)="showMessageAndRefresh($event)"></app-contact-form>
     </div>
-    <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
-    </div>
 </ng-template>
 
 <a id="notification" class="d-flex align-items-center flex-column justify-content-end">
