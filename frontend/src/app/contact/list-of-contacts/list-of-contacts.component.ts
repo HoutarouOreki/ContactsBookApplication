@@ -9,6 +9,7 @@ import { ContactService } from 'src/app/contact.service';
 })
 export class ListOfContactsComponent implements OnInit {
 
+  contactsLoaded = false;
   contactsList: Contact[] = [];
   filteredContactsList: Contact[] = [];
   paginatedContactsList: Contact[] = [];
@@ -26,6 +27,7 @@ export class ListOfContactsComponent implements OnInit {
     this.service.getContacts().subscribe(data => {
       this.contactsList = data;
       this.refreshVisualLists("");
+      this.contactsLoaded = true;
     })
   }
 

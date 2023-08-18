@@ -1,0 +1,11 @@
+span.input-group-text {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+@media (min-width: 450px) {
+
+    :host {
+        min-width: 400px;
+    }
+}

@@ -4,7 +4,7 @@ import { ListOfContactsComponent } from './contact/list-of-contacts/list-of-cont
 
 const routes: Routes = [
   { path: 'contacts', component: ListOfContactsComponent },
-  { path: '', redirectTo: 'contacts' }
+  { path: '', redirectTo: 'contacts', pathMatch: 'full' }
 ];
 
 @NgModule({
