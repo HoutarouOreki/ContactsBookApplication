@@ -10,8 +10,16 @@ namespace ContactsBookApplication.Backend
 
             // Add services to the container.
 
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("DbConnection")));
+            }
+            else
+            {
+                builder.Services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
+            }
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -26,10 +34,9 @@ namespace ContactsBookApplication.Backend
                 .SetIsOriginAllowed(origin => true) // allow any origin
                 .AllowCredentials()); // allow credentials
 
-            // Configure the HTTP request pipeline.
+            app.UseSwagger();
             if (app.Environment.IsDevelopment())
             {
-                app.UseSwagger();
                 app.UseSwaggerUI();
             }
 

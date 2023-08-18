@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpEvent, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Contact } from '../models/contact';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContactService {
 
-  readonly url = 'https://localhost:7298/contacts';
+  readonly url = environment.backendUrl;
 
   constructor(private http: HttpClient) { }
 
