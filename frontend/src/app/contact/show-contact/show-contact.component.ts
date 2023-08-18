@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Contact } from '../../contact';
 
 @Component({
   selector: 'app-show-contact',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./show-contact.component.css']
 })
 export class ShowContactComponent {
-
+  @Input({ required: true }) contact!: Contact
+  @Output() onEditButton = new EventEmitter();
 }

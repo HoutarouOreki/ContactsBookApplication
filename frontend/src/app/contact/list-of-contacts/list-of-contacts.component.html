@@ -34,7 +34,8 @@
     <div class="card w-100" *ngIf="contactsLoaded">
         <ul class="list-group list-group-flush">
             <li *ngFor="let contact of paginatedContactsList" class="list-group-item">
-                <app-contact [contact]="contact" (onEditButton)="onEditContactButton(content, contact)"></app-contact>
+                <app-show-contact [contact]="contact"
+                    (onEditButton)="onEditContactButton(content, contact)"></app-show-contact>
             </li>
         </ul>
     </div>

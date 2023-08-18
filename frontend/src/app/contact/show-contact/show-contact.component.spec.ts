@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ShowContactComponent } from './show-contact.component';
+import { ShowContactComponent as ShowContactComponent } from './show-contact.component';
 
-describe('ShowContactComponent', () => {
+describe('ContactComponent', () => {
   let component: ShowContactComponent;
   let fixture: ComponentFixture<ShowContactComponent>;
 
