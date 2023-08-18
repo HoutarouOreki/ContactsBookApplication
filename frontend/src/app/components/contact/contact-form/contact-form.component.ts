@@ -2,8 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
-import { Contact } from 'src/app/contact';
-import { ContactService } from 'src/app/contact.service';
+import { Contact } from 'src/app/models/contact';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-contact-form',

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Contact } from 'src/app/contact';
-import { ContactService } from 'src/app/contact.service';
+import { Contact } from 'src/app/models/contact';
+import { ContactService } from 'src/app/services/contact.service';
 
 @Component({
   selector: 'app-list-of-contacts',
