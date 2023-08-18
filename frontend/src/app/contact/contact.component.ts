@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Contact } from '../contact';
 
 @Component({
@@ -8,4 +8,5 @@ import { Contact } from '../contact';
 })
 export class ContactComponent {
   @Input({ required: true }) contact!: Contact
+  @Output() onEditButton = new EventEmitter();
 }

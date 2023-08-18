@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Contact } from 'src/app/contact';
 import { ContactService } from 'src/app/contact.service';
 
@@ -8,6 +9,12 @@ import { ContactService } from 'src/app/contact.service';
   styleUrls: ['./list-of-contacts.component.css']
 })
 export class ListOfContactsComponent implements OnInit {
+  @ViewChild('alert', { static: false }) alert!: NgbAlert;
+  alertClosed = true;
+  alertMessage = "";
+
+  formTitle = "";
+  editedContact: Contact | undefined;
 
   contactsLoaded = false;
   contactsList: Contact[] = [];
@@ -17,7 +24,7 @@ export class ListOfContactsComponent implements OnInit {
   pageSize = 10;
   h = 0;
 
-  constructor(private service: ContactService) { }
+  constructor(private service: ContactService, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.refreshList();
@@ -50,6 +57,24 @@ export class ListOfContactsComponent implements OnInit {
     var end = start + this.pageSize;
 
     this.paginatedContactsList = this.filteredContactsList.slice(start, end);
+  }
+
+  onCreateContactButton(content: any) {
+    this.formTitle = "Create a Contact";
+    this.modalService.open(content);
+  }
+
+  onEditContactButton(content: any, contact: Contact) {
+    this.formTitle = "Update contact";
+    this.editedContact = contact;
+    this.modalService.open(content);
+  }
+
+  onNewContact(message: string) {
+    this.refreshList();
+    this.alertMessage = message;
+    this.alertClosed = false;
+    setTimeout(() => this.alertClosed = true, 5000);
   }
 }
 

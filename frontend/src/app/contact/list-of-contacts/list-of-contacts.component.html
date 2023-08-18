@@ -1,6 +1,25 @@
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{formTitle}}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <app-contact-form [modal]="modal" [editedContact]="editedContact"
+            (newContactEvent)="onNewContact($event)"></app-contact-form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
+
+<a id="notification" class="d-flex align-items-center flex-column justify-content-end">
+    <ngb-alert #alert *ngIf="!alertClosed" (closed)="alertClosed = true" class="mb-2">{{alertMessage}}</ngb-alert>
+</a>
+
 <div class="d-flex flex-column align-items-center w-100">
 
-    <button type="button" class="btn btn-outline-primary mb-3" (click)="openModal(content)">Create new contact</button>
+    <button type="button" class="btn btn-outline-primary mb-3" (click)="onCreateContactButton(content)">Create new
+        contact</button>
 
     <div class=" input-group mb-1">
         <div class="input-group-prepend">
@@ -15,7 +34,7 @@
     <div class="card w-100" *ngIf="contactsLoaded">
         <ul class="list-group list-group-flush">
             <li *ngFor="let contact of paginatedContactsList" class="list-group-item">
-                <app-contact [contact]="contact"></app-contact>
+                <app-contact [contact]="contact" (onEditButton)="onEditContactButton(content, contact)"></app-contact>
             </li>
         </ul>
     </div>

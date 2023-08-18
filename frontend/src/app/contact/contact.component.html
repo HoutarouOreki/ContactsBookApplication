@@ -1,4 +1,4 @@
-<div class="d-flex">
+<div class="d-flex justify-content-between">
     <div class="me-4">
         <h5 class="card-title">{{contact.firstName}} {{contact.lastName}}</h5>
         <p class="card-subtitle mb-2 text-muted">{{contact.email}}</p>
@@ -6,7 +6,7 @@
             {{contact.city}} {{contact.zipCode}}</p>
     </div>
     <div class="d-flex flex-column ms-4 justify-content-center">
-        <button type="button" class="btn btn-sm btn-outline-info mb-1">Edit</button>
+        <button type="button" class="btn btn-sm btn-outline-info mb-1" (click)="onEditButton.emit()">Edit</button>
         <button type="button" class="btn btn-sm btn-outline-danger">Remove</button>
     </div>
 </div>
