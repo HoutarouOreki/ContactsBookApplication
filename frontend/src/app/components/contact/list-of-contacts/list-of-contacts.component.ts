@@ -12,6 +12,7 @@ export class ListOfContactsComponent implements OnInit {
   @ViewChild('alert', { static: false }) alert!: NgbAlert;
   alertClosed = true;
   alertMessage = "";
+  alertType = AlertTypes.success;
 
   formTitle = "";
   editedContact: Contact | undefined;
@@ -44,6 +45,8 @@ export class ListOfContactsComponent implements OnInit {
       this.updatePaginatedList();
       return;
     }
+
+    email = email.trim();
 
     this.filteredContactsList = this.contactsList.filter(contact =>
       contact.email.toLowerCase().includes(email.toLowerCase())
@@ -90,3 +93,7 @@ export class ListOfContactsComponent implements OnInit {
   }
 }
 
+const enum AlertTypes {
+  success = "success",
+  warning = "warning",
+}

@@ -92,13 +92,13 @@ namespace ContactsBookApplication.Backend.Controllers
             {
                 errors.Add("Last name must have at least 2 characters");
             }
-            if (!Regex.IsMatch(contact.Email, @"^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$"))
+            if (!Regex.IsMatch(contact.Email, @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"))
             {
                 errors.Add("Email is invalid");
             }
-            if (!Regex.IsMatch(contact.PhoneNumber, @"^\d{9}$"))
+            if (contact.PhoneNumber.Length > 0 && !Regex.IsMatch(contact.PhoneNumber, @"^\d{9}$"))
             {
-                errors.Add("Phone number must have 9 digits");
+                errors.Add("Phone number must have 9 digits or be blank");
             }
             return errors;
         }

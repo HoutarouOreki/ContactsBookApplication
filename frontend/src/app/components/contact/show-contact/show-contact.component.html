@@ -2,8 +2,8 @@
     <div class="me-4">
         <h5 class="card-title">{{contact.firstName}} {{contact.lastName}}</h5>
         <div class="card-subtitle mb-2 text-muted">{{contact.email}}</div>
-        <div class="card-text">📞 {{contact.phoneNumber}}</div>
-        <div class="card-text">🏠 {{getFormattedAddress(contact)}}</div>
+        <div *ngIf="hasPhoneNumber(contact)" class="card-text">📞 {{contact.phoneNumber}}</div>
+        <div *ngIf="hasAddress(contact)" class="card-text">🏠 {{getFormattedAddress(contact)}}</div>
     </div>
     <div class="d-flex flex-column ms-4 justify-content-center">
         <button type="button" class="btn btn-sm btn-outline-info mb-1" (click)="onEditButton.emit()">Edit</button>

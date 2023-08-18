@@ -10,7 +10,8 @@
 </ng-template>
 
 <div id="notification" class="d-flex align-items-center flex-column justify-content-end">
-    <ngb-alert #alert *ngIf="!alertClosed" (closed)="alertClosed = true" class="mb-2">{{alertMessage}}</ngb-alert>
+    <ngb-alert #alert *ngIf="!alertClosed" (closed)="alertClosed = true" [type]="alertType"
+        class="mb-2">{{alertMessage}}</ngb-alert>
 </div>
 
 <div class="d-flex flex-column align-items-center w-100">

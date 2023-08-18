@@ -28,7 +28,7 @@ export class ContactFormComponent implements OnInit {
       Validators.maxLength(25)
     ]),
     email: new FormControl("", [Validators.required, Validators.email]),
-    phoneNumber: new FormControl("", [Validators.required, Validators.pattern(/^\d{9}$/)]),
+    phoneNumber: new FormControl("", [Validators.pattern(/^\d{9}$/)]),
     address: new FormControl(""),
     city: new FormControl(""),
     zipCode: new FormControl(""),

@@ -13,11 +13,19 @@ export class ShowContactComponent {
 
   getFormattedAddress(contact: Contact): string {
     var cityZipCode = [contact.city, contact.zipCode]
-      .filter(x => x != undefined && x.length > 0)
+      .filter(x => x)
       .join(' ');
     var fullAddress = [contact.address, cityZipCode]
-      .filter(x => x != undefined && x.length > 0)
+      .filter(x => x)
       .join(', ');
     return fullAddress;
+  }
+
+  hasAddress(contact: Contact): boolean {
+    return [contact.city, contact.zipCode, contact.address].some(x => x);
+  }
+
+  hasPhoneNumber(contact: Contact): boolean {
+    return contact.phoneNumber.length > 0;
   }
 }
