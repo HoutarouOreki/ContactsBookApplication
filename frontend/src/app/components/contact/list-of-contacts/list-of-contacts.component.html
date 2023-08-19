@@ -24,12 +24,12 @@
             <span class="input-group-text" id="basic-addon1">@</span>
         </div>
         <input #filter type="text" class="form-control" placeholder="Filter by email" aria-label="Email"
-            aria-describedby="basic-addon1" (keyup)="refreshVisualLists(filter.value)">
+            aria-describedby="basic-addon1" [formControl]="filterControl" (keyup)="refreshVisualLists()">
     </div>
 
     <br>
 
-    <div class="card w-100" *ngIf="contactsLoaded">
+    <div class="card w-100" *ngIf="state == States.loaded">
         <ul class="list-group list-group-flush">
             <li *ngFor="let contact of paginatedContactsList" class="list-group-item">
                 <app-show-contact [contact]="contact" (onEditButton)="onEditContactButton(content, contact)"
@@ -38,13 +38,17 @@
         </ul>
     </div>
 
-    <div class="spinner-border" role="status" *ngIf="!contactsLoaded">
+    <div class="spinner-border" role="status" *ngIf="state == States.loading">
         <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <div *ngIf="state == States.error" class="alert alert-danger w-100" role="alert">
+        Error loading contacts.
     </div>
 
     <div class="mt-3">
         <ngb-pagination [collectionSize]="filteredContactsList.length" [(page)]="page" [pageSize]="pageSize"
-            aria-label="Default pagination" (pageChange)="refreshVisualLists(filter.value)"></ngb-pagination>
+            aria-label="Default pagination" (pageChange)="refreshVisualLists()"></ngb-pagination>
     </div>
 
     <p>Contacts matching the filter: {{filteredContactsList.length}}</p>

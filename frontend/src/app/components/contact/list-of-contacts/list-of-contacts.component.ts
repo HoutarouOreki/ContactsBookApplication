@@ -1,5 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NgbAlert, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Observer } from 'rxjs';
 import { Contact } from 'src/app/models/contact';
 import { ContactService } from 'src/app/services/contact.service';
 
@@ -12,18 +15,21 @@ export class ListOfContactsComponent implements OnInit {
   @ViewChild('alert', { static: false }) alert!: NgbAlert;
   alertClosed = true;
   alertMessage = "";
-  alertType = AlertTypes.success;
+  alertType = AlertTypes.default;
+
+  filterControl = new FormControl("");
 
   formTitle = "";
   editedContact: Contact | undefined;
 
-  contactsLoaded = false;
+  state = States.loading;
+  States = States;
+
   contactsList: Contact[] = [];
   filteredContactsList: Contact[] = [];
   paginatedContactsList: Contact[] = [];
   page: number = 1;
   pageSize = 10;
-  h = 0;
 
   constructor(private service: ContactService, private modalService: NgbModal) { }
 
@@ -32,21 +38,26 @@ export class ListOfContactsComponent implements OnInit {
   }
 
   refreshList() {
-    this.service.getContacts().subscribe(data => {
-      this.contactsList = data;
-      this.refreshVisualLists("");
-      this.contactsLoaded = true;
-    })
+    this.service.getContacts().subscribe({
+      next: (data: Contact[]) => this.setContacts(data),
+      error: (err: HttpErrorResponse) => this.handleLoadingError(err),
+    });
   }
 
-  refreshVisualLists(email: string) {
-    if (!email) {
-      this.filteredContactsList = this.contactsList;
-      this.updatePaginatedList();
-      return;
-    }
+  handleLoadingError(err: HttpErrorResponse) {
+    this.state = States.error;
+    this.showAlert(err.status + " " + err.statusText, AlertTypes.error);
+  }
 
-    email = email.trim();
+  setContacts(contacts: Contact[]) {
+    this.contactsList = contacts;
+    this.refreshVisualLists();
+    this.state = States.loaded;
+  }
+
+  refreshVisualLists() {
+
+    var email = this.filterControl.value?.trim() ?? "";
 
     this.filteredContactsList = this.contactsList.filter(contact =>
       contact.email.toLowerCase().includes(email.toLowerCase())
@@ -87,13 +98,26 @@ export class ListOfContactsComponent implements OnInit {
 
   showMessageAndRefresh(message: string) {
     this.refreshList();
+    this.showAlert(message);
+  }
+
+  private showAlert(message: string, alertType?: AlertTypes) {
     this.alertMessage = message;
     this.alertClosed = false;
+    this.alertType = alertType ?? AlertTypes.default;
     setTimeout(() => this.alertClosed = true, 5000);
   }
 }
 
 const enum AlertTypes {
+  default = "primary",
   success = "success",
   warning = "warning",
+  error = "danger",
+}
+
+enum States {
+  loading,
+  loaded,
+  error,
 }
