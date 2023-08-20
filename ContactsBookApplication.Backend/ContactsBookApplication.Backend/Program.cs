@@ -1,3 +1,4 @@
+using ContactsBookApplication.Backend.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContactsBookApplication.Backend
@@ -21,6 +22,7 @@ namespace ContactsBookApplication.Backend
                     options.UseSqlServer(builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING")));
             }
 
+            builder.Services.AddScoped<IContactService, ContactService>();
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
