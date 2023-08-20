@@ -88,7 +88,7 @@ export class ContactFormComponent {
     this.title = "Create a Contact";
     this.editedContact = undefined;
     this.resetForm();
-    this.modalService.open(this.modal);
+    this.modalService.open(this.modal, { scrollable: true });
   }
 
   openToEdit(contact: Contact) {
@@ -97,7 +97,7 @@ export class ContactFormComponent {
     this.resetForm();
     this.editedContact = contact;
     this.contactForm.setValue(this.editedContact);
-    this.modalService.open(this.modal);
+    this.modalService.open(this.modal, { scrollable: true });
   }
 
   // this method is necessary instead of form.reset()
