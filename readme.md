@@ -1,34 +1,21 @@
 # Contacts Book
 
-![Alt text](image.png)
-Main view
+Site deployed at https://contactsbookapp.azurewebsites.net/contacts
 
-![Alt text](image-1.png)
-Creating a contact
-
-![Alt text](image-2.png)
-Updating a contact
-
-![Alt text](image-3.png)
-Success alert
-
-![Alt text](image-4.png)
-Filtering by email
-
-![Alt text](image-5.png)
-Spinner while loading data
+May be slow to load since it's on a low cost tier.
 
 ## Validation
 
-There's frontend and backend validation. Only first name, last name, email, and phone numbers are validated.
+There's both frontend and backend validation. Only first name, last name, email, and phone numbers are validated.
 
 ## Technologies and frameworks
 - Angular 16
 - .NET 6
-- Bootstrap
+- Bootstrap 5
 - MS SQL Express
+- Azure
 
-## Database
+## Development database
 
 Database: ContactsBook
 
@@ -41,14 +28,13 @@ Password: AfD*943!
 
 ## Running
 
-Backend:
+### Backend
 ```
 cd ContactsBookApplication.Backend/ContactsBookApplication.Backend
-
 dotnet run
 ```
 
-Frontend:
+### Frontend
 ```
 cd frontend
 ng serve -o
