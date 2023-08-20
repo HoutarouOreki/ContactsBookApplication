@@ -1,12 +1,14 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex flex-column flex-sm-row justify-content-between">
     <div class="me-4">
         <h5 class="card-title">{{contact.firstName}} {{contact.lastName}}</h5>
         <div class="card-subtitle mb-2 text-muted">{{contact.email}}</div>
         <div *ngIf="hasPhoneNumber(contact)" class="card-text">📞 {{contact.phoneNumber}}</div>
         <div *ngIf="hasAddress(contact)" class="card-text">🏠 {{getFormattedAddress(contact)}}</div>
     </div>
-    <div class="d-flex flex-column ms-4 justify-content-center">
-        <button type="button" class="btn btn-sm btn-outline-info mb-1" (click)="onEditButton.emit()">Edit</button>
-        <button type="button" class="btn btn-sm btn-outline-danger" (click)="onRemoveButton.emit()">Remove</button>
+    <div class="d-flex flex-row flex-sm-column ms-sm-4 mt-2 mt-sm-0 justify-content-center">
+        <button type="button" class="btn btn-sm btn-outline-info mb-sm-1 me-1 me-sm-0 w-100"
+            (click)="onEditButton.emit()">Edit</button>
+        <button type="button" class="btn btn-sm btn-outline-danger w-100"
+            (click)="onRemoveButton.emit()">Remove</button>
     </div>
 </div>
