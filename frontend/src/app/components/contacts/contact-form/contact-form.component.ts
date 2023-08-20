@@ -1,7 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModalWindow } from '@ng-bootstrap/ng-bootstrap/modal/modal-window';
+import { Alert, AlertTypes } from 'src/app/models/alert';
 import { Contact } from 'src/app/models/contact';
 import { ContactService } from 'src/app/services/contact.service';
 
@@ -10,10 +12,13 @@ import { ContactService } from 'src/app/services/contact.service';
   templateUrl: './contact-form.component.html',
   styleUrls: ['./contact-form.component.css']
 })
-export class ContactFormComponent implements OnInit {
-  @Input({ required: true }) modal!: NgbModalWindow;
+export class ContactFormComponent {
+  @ViewChild('content', { static: false }) modal!: NgbModalWindow;
   @Input() editedContact: Contact | undefined;
-  @Output() newContactEvent = new EventEmitter<string>();
+  @Output() alert = new EventEmitter<Alert>();
+  @Output() contactsUpdated = new EventEmitter();
+
+  title: String = "";
 
   contactForm = new FormGroup({
     id: new FormControl<number>(0),
@@ -37,14 +42,7 @@ export class ContactFormComponent implements OnInit {
   sending = false;
   errors: string[] | undefined;
 
-  constructor(private contactService: ContactService) {
-  }
-  ngOnInit(): void {
-    if (!this.editedContact) {
-      return;
-    }
-
-    this.contactForm.setValue(this.editedContact);
+  constructor(private contactService: ContactService, private modalService: NgbModal) {
   }
 
   onSubmit() {
@@ -59,24 +57,62 @@ export class ContactFormComponent implements OnInit {
     if (this.editedContact) {
       this.contactService.editContact(contact as Contact).subscribe(observer);
     } else {
+      console.log(contact);
       this.contactService.addContact(contact as Contact).subscribe(observer);
     }
   }
 
-  handleResponse(contact: Contact) {
+  private handleResponse(contact: Contact) {
     this.sending = false;
-    console.log(contact);
-    this.newContactEvent.emit((contact.firstName + " " + contact.lastName) +
-      (this.editedContact ? " updated" : " added"));
-    this.modal.dismiss("complete");
+    this.errors = undefined;
+    this.alert.emit({
+      message: (contact.firstName + " " + contact.lastName) +
+        (this.editedContact ? " updated" : " added"),
+      type: AlertTypes.success
+    });
+    this.contactsUpdated.emit();
+    this.modalService.dismissAll();
   }
 
-  handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
     this.sending = false;
     if (error.error.length) {
       this.errors = error.error;
     } else {
       this.errors = [error.message];
     }
+  }
+
+  openToCreate() {
+    this.errors = undefined;
+    this.title = "Create a Contact";
+    this.editedContact = undefined;
+    this.resetForm();
+    this.modalService.open(this.modal);
+  }
+
+  openToEdit(contact: Contact) {
+    this.errors = undefined;
+    this.title = "Update contact";
+    this.resetForm();
+    this.editedContact = contact;
+    this.contactForm.setValue(this.editedContact);
+    this.modalService.open(this.modal);
+  }
+
+  // this method is necessary instead of form.reset()
+  // because the latter sets fields to `null`
+  resetForm() {
+    this.contactForm.reset();
+    this.contactForm.setValue({
+      id: 0,
+      firstName: "",
+      lastName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      city: "",
+      zipCode: "",
+    })
   }
 }

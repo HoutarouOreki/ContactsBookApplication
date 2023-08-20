@@ -10,6 +10,8 @@ import { ContactService } from './services/contact.service';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ContactsComponent } from './components/contacts/contacts.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ShowContactComponent,
     ListOfContactsComponent,
     ShowContactComponent,
-    ContactFormComponent
+    ContactFormComponent,
+    ContactsComponent,
+    AlertComponent
   ],
   imports: [
     BrowserModule,

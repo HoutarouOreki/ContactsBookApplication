@@ -1,0 +1,4 @@
+<div *ngIf="alert" id="notification" class="d-flex align-items-center flex-column justify-content-end">
+    <ngb-alert #ngbAlertComponent [type]="alert.type" class="mb-2"
+        (closed)="alert = undefined">{{alert.message}}</ngb-alert>
+</div>

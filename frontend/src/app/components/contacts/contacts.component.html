@@ -1,0 +1,15 @@
+<app-contact-form #form (alert)="alertComponent.show($event)"
+    (contactsUpdated)="listOfContacts.refreshList()"></app-contact-form>
+
+<app-alert #alertComponent></app-alert>
+
+<div class="d-flex flex-column align-items-center w-100">
+
+    <button type="button" class="btn btn-outline-primary mb-3" (click)="onCreateContactButton()">
+        Create new contact
+    </button>
+
+    <app-list-of-contacts #listOfContacts [contactFormComponent]="form"
+        (alert)="alertComponent.show($event)"></app-list-of-contacts>
+
+</div>

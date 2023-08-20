@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ListOfContactsComponent } from './components/contacts/list-of-contacts/list-of-contacts.component';
+import { ContactsComponent } from './components/contacts/contacts.component';
 
 const routes: Routes = [
-  { path: 'contacts', component: ListOfContactsComponent },
+  { path: 'contacts', component: ContactsComponent },
   { path: '', redirectTo: 'contacts', pathMatch: 'full' }
 ];
 
