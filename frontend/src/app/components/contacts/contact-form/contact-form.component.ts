@@ -36,7 +36,7 @@ export class ContactFormComponent {
     phoneNumber: new FormControl("", [Validators.pattern(/^\d{9}$/)]),
     address: new FormControl(""),
     city: new FormControl(""),
-    zipCode: new FormControl(""),
+    zipCode: new FormControl("", [Validators.pattern(/^\d\d\-\d\d\d$/)]),
   });
 
   sending = false;

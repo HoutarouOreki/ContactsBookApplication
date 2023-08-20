@@ -93,6 +93,10 @@ namespace ContactsBookApplication.Backend.Services
             {
                 errors.Add("Phone number must have 9 digits or be blank");
             }
+            if (contact.ZipCode.Length > 0 && !Regex.IsMatch(contact.ZipCode, @"^\d\d\-\d\d\d$"))
+            {
+                errors.Add("Zip code must be in a 12-345 format.");
+            }
             return errors;
         }
     }

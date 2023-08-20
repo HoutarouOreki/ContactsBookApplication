@@ -6,7 +6,7 @@ May be slow to load since it's on a low cost tier.
 
 ## Validation
 
-There's both frontend and backend validation. Only first name, last name, email, and phone numbers are validated.
+There's both frontend and backend validation. Only first name, last name, email, phone numbers, and zip-code are validated.
 
 ## Technologies and frameworks
 - Angular 16
