@@ -85,7 +85,7 @@ namespace ContactsBookApplication.Backend.Services
             {
                 errors.Add("Last name must have at least 2 characters");
             }
-            if (!Regex.IsMatch(contact.Email, @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"))
+            if (!Regex.IsMatch(contact.Email.ToLower(), @"^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"))
             {
                 errors.Add("Email is invalid");
             }
