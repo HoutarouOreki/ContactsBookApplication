@@ -27,7 +27,7 @@
                 <label for="validationCustomUsername" class="form-label">Email</label>
                 <div class="input-group has-validation">
                     <span class="input-group-text" id="inputGroupPrepend">@</span>
-                    <input type="text"
+                    <input type="text" inputmode="email"
                         [ngClass]="contactForm.controls.email.touched ? (contactForm.controls.email.valid ? 'is-valid' : 'is-invalid') : ''"
                         class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend"
                         formControlName="email">
@@ -38,7 +38,7 @@
             </div>
             <div class="col-md-6 col-12">
                 <label for="validationCustom03" class="form-label">Phone number</label>
-                <input type="text"
+                <input type="text" inputmode="numeric"
                     [ngClass]="contactForm.controls.phoneNumber.touched ? (contactForm.controls.phoneNumber.valid ? 'is-valid' : 'is-invalid') : ''"
                     class="form-control" id="validationCustom03" formControlName="phoneNumber">
                 <div class="invalid-feedback">
@@ -62,6 +62,9 @@
                 <input type="text"
                     [ngClass]="contactForm.controls.zipCode.touched ? (contactForm.controls.zipCode.valid ? 'is-valid' : 'is-invalid') : ''"
                     class="form-control" id="validationCustom05" formControlName="zipCode">
+                <div class="invalid-feedback">
+                    A zip code must be in a 12-345 format or blank.
+                </div>
             </div>
             <div class="col-12">
                 <button class="btn btn-primary w-100" type="submit" [disabled]="sending || !contactForm.valid">Submit
