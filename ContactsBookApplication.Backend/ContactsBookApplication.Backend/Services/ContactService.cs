@@ -25,9 +25,9 @@ namespace ContactsBookApplication.Backend.Services
             return true;
         }
 
-        public IEnumerable<Contact> GetAll()
+        public IQueryable<Contact> GetAll()
         {
-            return context.Contacts.ToList();
+            return context.Contacts;
         }
 
         public Contact? GetById(int id)

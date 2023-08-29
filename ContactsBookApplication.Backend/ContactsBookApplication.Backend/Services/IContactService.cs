@@ -4,7 +4,7 @@ namespace ContactsBookApplication.Backend.Services
 {
     public interface IContactService
     {
-        IEnumerable<Contact> GetAll();
+        IQueryable<Contact> GetAll();
 
         Contact? GetById(int id);
 

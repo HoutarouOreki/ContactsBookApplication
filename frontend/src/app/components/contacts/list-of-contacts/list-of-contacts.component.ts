@@ -5,6 +5,7 @@ import { Alert, AlertTypes } from 'src/app/models/alert';
 import { Contact } from 'src/app/models/contact';
 import { ContactService } from 'src/app/services/contact.service';
 import { ContactFormComponent } from '../contact-form/contact-form.component';
+import { ContactsResponse } from 'src/app/models/contactsReponse';
 
 @Component({
   selector: 'app-list-of-contacts',
@@ -17,9 +18,8 @@ export class ListOfContactsComponent implements OnInit {
   state = States.loading;
   States = States;
 
-  contactsList: Contact[] = [];
-  filteredContactsList: Contact[] = [];
-  paginatedContactsList: Contact[] = [];
+  contacts: Contact[] = [];
+  totalMatchingFilter?: number;
 
   page: number = 1;
   pageSize = 10;
@@ -35,8 +35,9 @@ export class ListOfContactsComponent implements OnInit {
 
   refreshList() {
     this.state = States.loading;
-    this.service.getContacts().subscribe({
-      next: (data: Contact[]) => this.setContacts(data),
+    var email = this.filterControl.value?.trim() ?? "";
+    this.service.getContactsFilteredPaginated(email, this.page, this.pageSize).subscribe({
+      next: (data: ContactsResponse) => this.setContacts(data),
       error: (err: HttpErrorResponse) => this.handleLoadingError(err),
     });
   }
@@ -46,29 +47,10 @@ export class ListOfContactsComponent implements OnInit {
     this.alert.emit({ message: err.status + " " + err.statusText, type: AlertTypes.error });
   }
 
-  setContacts(contacts: Contact[]) {
-    this.contactsList = contacts;
-    this.refreshVisualLists();
+  setContacts(contactsResponse: ContactsResponse) {
+    this.contacts = contactsResponse.data;
+    this.totalMatchingFilter = contactsResponse.totalMatchingFilter;
     this.state = States.loaded;
-  }
-
-  refreshVisualLists() {
-    this.updateFilteredList();
-    this.updatePaginatedList();
-  }
-
-  private updateFilteredList() {
-    var email = this.filterControl.value?.trim() ?? "";
-
-    this.filteredContactsList = this.contactsList.filter(contact => contact.email.toLowerCase().includes(email.toLowerCase())
-    );
-  }
-
-  updatePaginatedList() {
-    var start = (this.page - 1) * this.pageSize;
-    var end = start + this.pageSize;
-
-    this.paginatedContactsList = this.filteredContactsList.slice(start, end);
   }
 
   onEditContactButton(contact: Contact) {
